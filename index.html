@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d18">
+  <title>Case 001 | The Missing Quote — Oormila's Debugging Detective</title>
+  <meta name="description" content="An interactive software incident mystery by Oormila Ezhai Kannan. Inspect the evidence and solve the case.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Oormila Systems home"><span class="brand-mark">O.</span><span>OORMILA <b>SYSTEMS</b></span></a>
+    <div class="top-status"><span class="live-dot"></span> INCIDENT SIMULATOR <span class="status-divider">/</span> <span id="clock">SYSTEM READY</span></div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow"><span class="eyebrow-line"></span> DIGITAL FORENSICS · CASE FILE 001</p>
+      <h1>Something broke.<br><span>Find out why.</span></h1>
+      <p class="lede">A quote request vanished somewhere between the browser and the database. Three clues. One root cause. Can you connect the dots?</p>
+      <div class="case-meta">
+        <span><i class="meta-icon">▣</i> CASE <b>DD-001</b></span>
+        <span><i class="meta-icon">◷</i> EST. TIME <b>2–4 MIN</b></span>
+        <span><i class="meta-icon">◇</i> DIFFICULTY <b>ROOKIE DETECTIVE</b></span>
+      </div>
+    </section>
+
+    <section class="dashboard" aria-label="Incident dashboard">
+      <div class="panel panel-status">
+        <div class="panel-heading"><span><span class="pulse"></span> SYSTEM OVERVIEW</span><span class="micro">SIMULATED ENVIRONMENT</span></div>
+        <div class="system-grid">
+          <div class="system-item"><div class="system-symbol ok">↗</div><div><strong>Web Client</strong><small>Quote form submitted</small></div><span class="pill pill-ok">ONLINE</span></div>
+          <div class="system-item"><div class="system-symbol warn">⇄</div><div><strong>REST API</strong><small>Request returned an error</small></div><span class="pill pill-warn">WARNING</span></div>
+          <div class="system-item"><div class="system-symbol trace">▤</div><div><strong>Database</strong><small>No new quote record found</small></div><span class="pill pill-trace">TRACE</span></div>
+        </div>
+        <div class="progress-wrap"><div class="progress-label"><span>INVESTIGATION PROGRESS</span><b id="progressText">0 / 3 CLUES REVIEWED</b></div><div class="progress-track"><div id="progressBar"></div></div></div>
+      </div>
+
+      <div class="panel evidence-panel">
+        <div class="panel-heading"><span>◈ EVIDENCE BOARD</span><span class="micro">SELECT EACH FILE TO INSPECT</span></div>
+        <div class="evidence-list">
+          <button class="evidence-card" data-clue="0">
+            <span class="file-icon">LOG</span><span class="evidence-copy"><strong>Evidence A — Client Log</strong><small>What did the browser send?</small></span><span class="file-arrow">↗</span><span class="reviewed-mark">✓</span>
+          </button>
+          <button class="evidence-card" data-clue="1">
+            <span class="file-icon file-purple">API</span><span class="evidence-copy"><strong>Evidence B — API Response</strong><small>Where did the request fail?</small></span><span class="file-arrow">↗</span><span class="reviewed-mark">✓</span>
+          </button>
+          <button class="evidence-card" data-clue="2">
+            <span class="file-icon file-amber">DB</span><span class="evidence-copy"><strong>Evidence C — Database Trace</strong><small>Did the record get saved?</small></span><span class="file-arrow">↗</span><span class="reviewed-mark">✓</span>
+          </button>
+        </div>
+        <div id="evidenceDetail" class="evidence-detail" aria-live="polite">
+          <div class="detail-placeholder"><span class="scan-icon">⌕</span><strong>Evidence awaits inspection</strong><span>Select a file above to reveal its contents.</span></div>
+        </div>
+      </div>
+
+      <div class="panel solve-panel">
+        <div class="panel-heading"><span>⌘ DETECTIVE'S CONSOLE</span><span class="micro">ROOT-CAUSE ANALYSIS</span></div>
+        <p class="question">Based on the evidence, what is the most likely cause?</p>
+        <div class="answer-list">
+          <button class="answer" data-answer="0"><span class="answer-key">A</span><span><strong>The database is offline</strong><small>The application cannot connect to the database.</small></span></button>
+          <button class="answer" data-answer="1"><span class="answer-key">B</span><span><strong>The API rejected an invalid request</strong><small>The request failed validation before persistence.</small></span></button>
+          <button class="answer" data-answer="2"><span class="answer-key">C</span><span><strong>The browser never submitted the form</strong><small>The frontend failed before reaching the server.</small></span></button>
+        </div>
+        <div class="console-actions"><button id="hintBtn" class="text-button">Need a hint?</button><button id="resetBtn" class="text-button">Reset case ↺</button></div>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="success" class="success-panel hidden" aria-live="polite">
+      <div class="success-icon">✓</div><p class="eyebrow">CASE CLOSED</p>
+      <h2>Good detective work.</h2>
+      <p id="successText">You connected the clues and identified the likely root cause.</p>
+      <div class="lesson"><strong>THE ENGINEERING LESSON</strong><p>Follow the request across system boundaries. Logs from the client, API, and database tell a more complete story than any single symptom.</p></div>
+      <button id="bonusBtn" class="primary-button">Unlock the hidden file <span>↗</span></button>
+    </section>
+
+    <section id="secret" class="secret-panel hidden" aria-live="polite">
+      <p class="eyebrow">◈ CLASSIFIED · EASTER EGG FOUND</p>
+      <h2>Curiosity is a superpower.</h2>
+      <p>You looked beyond the obvious. That's where the interesting bugs — and the best solutions — hide.</p>
+      <div class="secret-code">while (curious) { <span>keepBuilding();</span> }</div>
+      <p class="signature">— Oormila · Always investigating, always building.</p>
+    </section>
+
+    <footer class="footer"><span>BUILT WITH CURIOSITY <span class="heart">♥</span> AND A DEBUGGER</span><span>FICTIONAL INCIDENT · NO LIVE SYSTEMS CONNECTED</span><a href="https://github.com/oormiek" target="_blank" rel="noreferrer">MORE FROM OORMILA ↗</a></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
